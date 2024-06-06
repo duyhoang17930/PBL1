@@ -150,7 +150,6 @@ int main() {
     file>>n;
     double x1[n+1],x2[n+1];
     int y[n];
-    output<<n; 
     
     for (int i=0;i<=n+1;i++){   //doc file csv
     	file>>x1[i];
