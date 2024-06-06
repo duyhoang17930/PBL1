@@ -58,7 +58,7 @@ void introduce(){
 } 
 
 
-// Ham huan luyen SVM
+// Ham tinh toan SVM
 void trainSVM(const vector<double>& x1, const vector<double>& x2, const vector<int>& y) {
     double learningRate = 0.0005;   //toc do thay doi w1, w2, b
     double threshold = 0.001;   //dieu kien dung, do chinh xac
@@ -118,17 +118,20 @@ void Print(double w1,double w2, double b){
     cout << "Equation: " << w1 << " * x1" <<dauw2<< fabs(w2) << " * x2 " <<daub<< fabs(b) << " = 0" << "\n\n";// In ra phuong trinh sieu phang tim duoc
 }
 
-
-int main() {
-    //gioi thieu
-    introduce();
-    string filename;
-    cout << "0: Thoat chuong trinh"<<"\n";
+void bang_chon(){
+	cout << "0: Thoat chuong trinh"<<"\n";
     cout << "1: 18 diem"<<"\n";
     cout << "2: 15 diem"<<"\n";
     cout << "3: 15 diem"<<"\n";
     cout << "4: 599 diem"<<"\n";
     cout << "5: 1078 diem"<<"\n";
+}
+
+int main() {
+    //gioi thieu
+    introduce();
+    string filename;
+	bang_chon();
     // Du lieu dau vao
     while(true){
 //    string filename;
@@ -142,31 +145,22 @@ int main() {
     	return 1;
 	}
     ofstream output;
-	output.open("outputt.txt",ios::out);
+	output.open("output.txt",ios::out);
     int n,i;
     file>>n;
     double x1[n+1],x2[n+1];
     int y[n];
-    
-    //sua file cho hop le 
     output<<n; 
-    string s;
-    for (int i=1;i<=n+2;i++){   //doc file csv
-    	getline(file,s);
-    	for (int j=1;j<=s.length();j++)
-    		if (s[j]==',') s[j]=' '; 
-    	output<<s<<endl;
+    
+    for (int i=0;i<=n+1;i++){   //doc file csv
+    	file>>x1[i];
+    	file.ignore();
+    	file>>x2[i];
+    	file.ignore();
+    	file>>y[i];
+    	file.ignore();
 	} 
 	file.close();
-	output.close();
-	
-    file.open("outputt.txt",ios::in);
-    output.open("output.txt",ios::out);
-    file>>n;
-    for (i=0;i<n;i++)
-    file>>x1[i]>>x2[i]>>y[i];
-    file.close();
-
     // Chuyen doi mang thanh vector
     vector<double> X1(x1, x1 + n);
     vector<double> X2(x2, x2 + n);
